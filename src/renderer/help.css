@@ -1,0 +1,88 @@
+* {
+    font-family: "M PLUS Rounded 1c",
+      Avenir
+        Next,
+      Helvetica,
+      sans-serif;
+    color: white;
+    font-size: 1rem;
+  }
+
+:root {
+  --bg-color: #8990ec;
+  --wrapper-color: #272639;
+  --acent-color: #8990ec;
+  --result-box-color: #171721;
+}
+
+body {
+  background: var(--wrapper-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* no scroll bar */
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.wrapper {
+    background: var(--wrapper-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+#title {
+  font-size: 2rem;
+  font-weight: 700;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    padding-top: 0;
+    width: 100%;
+}
+
+.par {
+    display: flex;
+    /* make text center */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 400;
+    padding-top: 0;
+    padding-left: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.buttonShow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+
+}
+
+.button {
+    width: 100px;
+    height: 50px;
+    outline: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    /* center text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

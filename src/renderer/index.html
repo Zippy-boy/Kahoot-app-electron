@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap"
+        rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Tip Calculator</title>
+</head>
+
+<body>
+    
+    <div class="wrapper">
+        <div id="Tital">Kahoot hacker</div>
+        <div class="line"></div>
+        <div class="main">
+            <div class="container" id="topContainer">
+                <div class="title">Id input</div>
+                <div class="inputContainer">
+                    <span>quizId=</span>
+                    <input onkeyup="" type="text" id="IdInput"
+                        placeholder="56654076-ca28-4109-8e06-fb58" />
+                </div>
+            </div>
+            <div class="container" id="bottom">
+                <!-- Enter button -->
+                <button class="button" id="enter" onclick="enter()">Enter</button>
+                <div class="splitContainer">
+                    <div class="title">Page</div>
+                    <div class="controls">
+                        <span class="buttonContainer">
+                            <button class="splitButton" id="increment" onclick="increasePage()">
+                                <span class="buttonText">+</span>
+                            </button>
+                        </span>
+                        <span class="splitAmount" id="numberOfPeople">1</span>
+                        <span class="buttonContainer">
+                            <button class="splitButton" id="decrement" onclick="decreasePage()">
+                                <span class="buttonText">-</span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="results">
+                <div class="title">Results</div>
+                <div class="resultContainer">
+                    <div class="question" style="margin-top: 10px"><span>Q: </span><span id="question">What did the fox say?</span></div>
+                    <div class="awnser" style="margin-top: 10px"><span>Awnser: </span><span id="awnser">I dont know</span></div>
+                    <div class="place" style="margin-top: 10px"><span>Place: </span><span id="place">4</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

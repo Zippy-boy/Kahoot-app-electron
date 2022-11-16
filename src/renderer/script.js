@@ -1,5 +1,4 @@
-
-let url;
+let url = "asd";
 let kahoot_id = url;
 let answers_url = `https://create.kahoot.it/rest/kahoots/` + kahoot_id + `/card/?includeKahoot=true`;
 
@@ -38,36 +37,40 @@ function decreasePage() {
 }
 
 function enter() {
+    pages = [];
+    question_number = 0;
+
     url = document.getElementById("IdInput").value
     answers_url = `https://create.kahoot.it/rest/kahoots/` + url + `/card/?includeKahoot=true`;
-    fetch(answers_url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            try {
-                for(let q in data.kahoot.questions) {
-                    count = 0;
-                    try {
-                        //console.log(data.kahoot.questions[q].question);
-                        for(let choice in data.kahoot.questions[q].choices) {
-                            count++;
-                            if(data.kahoot.questions[q].choices[choice].correct == true) {
-                                break;
+    try {
+        fetch(answers_url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                try {
+                    for(let q in data.kahoot.questions) {
+                        count = 0;
+                        try {
+                            //console.log(data.kahoot.questions[q].question);
+                            for(let choice in data.kahoot.questions[q].choices) {
+                                count++;
+                                if(data.kahoot.questions[q].choices[choice].correct == true) {
+                                    break;
+                                }
                             }
-                        }
-                        num = count; count = 0;
-                        question_number++;
-                        console.log(num);
-                        pages.push({
-                            question: (data.kahoot.questions[q].question),
-                            answer: (data.kahoot.questions[q].choices[num-1].answer),
-                            correct: num
-                        });
-                    } catch(error) {console.log(error);}
-                }
-                setHTML(pages, 0);
-            } catch (error) {questionHTML.innerHTML = error}
-        }
-    );
+                            num = count; count = 0;
+                            question_number++;
+                            console.log(num);
+                            pages.push({
+                                question: (data.kahoot.questions[q].question),
+                                answer: (data.kahoot.questions[q].choices[num-1].answer),
+                                correct: num
+                            });
+                        } catch(error) {console.log(error);}
+                    }
+                    setHTML(pages, 0);
+                } catch (error) {questionHTML.innerHTML = "invalid kahoot id";}
+            }
+        );
+    } catch (error) {questionHTML.innerHTML = "invalid kahoot id";}
 }
-

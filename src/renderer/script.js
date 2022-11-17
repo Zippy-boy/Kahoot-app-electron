@@ -1,12 +1,10 @@
-let url = "asd";
+let url = "fead96f4-ff33-43a0-bbc1-c1bafb2b11b1";
 let kahoot_id = url;
 let answers_url = `https://create.kahoot.it/rest/kahoots/` + kahoot_id + `/card/?includeKahoot=true`;
 
 let numberOfPeople = 0;
 let numberOfPeopleHTML = document.getElementById("numberOfPeople");
-let questionHTML = document.getElementById("question");
-let answerHTML = document.getElementById("awnser");
-let placeHTML = document.getElementById("place");
+let questionHTML = document.getElementById("questions");
 
 let pages = [];
 let question_number = 0;
@@ -15,9 +13,7 @@ let count = 0;
 
 const setHTML = (pages, question_number) => {
     numberOfPeopleHTML.innerHTML = question_number+1;
-    questionHTML.innerHTML = pages[question_number].question;
-    answerHTML.innerHTML = pages[question_number].answer;
-    placeHTML.innerHTML = pages[question_number].correct;
+    questionHTML.innerHTML = "Question: " + pages[question_number].question + "<br><br>" + "Answer: " + pages[question_number].answer + "<br><br>" + "Place: " + pages[question_number].correct;
 };
 
 function increasePage() {
@@ -39,8 +35,8 @@ function decreasePage() {
 function enter() {
     pages = [];
     question_number = 0;
-
-    url = document.getElementById("IdInput").value
+    if(document.getElementById("IdInput").value != "") {url = document.getElementById("IdInput").value}
+    else {url = "fead96f4-ff33-43a0-bbc1-c1bafb2b11b1"}
     answers_url = `https://create.kahoot.it/rest/kahoots/` + url + `/card/?includeKahoot=true`;
     try {
         fetch(answers_url)

@@ -11,7 +11,7 @@
 :root {
   --bg-color: #8990ec;
   --wrapper-color: #272639;
-  --acent-color: #8990ec;
+  --acent-color: #a5abfe;
   --result-box-color: #171721;
 }
 
@@ -24,6 +24,17 @@ body {
   overflow: hidden;
   padding: 0;
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--acent-color);
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
 }
 
 .wrapper {
@@ -51,6 +62,7 @@ body {
 .container {
   margin-top: 1.4rem;
 }
+
 
 .results {
   margin-top: 2rem;
@@ -81,16 +93,22 @@ body {
   outline: none;
   padding: none;
   width: 100%;
-
 }
 
+
+
 .buttonContainer {
-  background: #8990ec;
+  background: var(--acent-color);
   display: grid;
   place-items: center;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
+}
+
+.buttonContainer:hover, .button:hover {
+  background: #787ba7;
+  cursor: pointer;
 }
 
 .splitButton {
@@ -108,6 +126,8 @@ body {
 .controls {
   display: flex;
   align-items: center;
+  /* keep everythig in a fixed position */
+  
 }
 
 .splitButton {
@@ -118,7 +138,7 @@ body {
 }
 
 .buttonText {
-  color: #353959 !important;
+  color: #353959;
 }
 
 .splitAmount {
@@ -156,15 +176,20 @@ body {
   border-radius: 25px;
   cursor: pointer;
   font-size: 2rem;
-  margin-top: 3.3rem;
-}
-
-.button:hover {
-  background: #272639;
-  color: var(--acent-color);
-  border: 2px solid var(--acent-color);
+  margin-top: 3.6rem;
 }
 
 span {
   font-size: 1.5rem;
+}
+
+.resultContainer {
+  /* make dark coulor */
+  background: #171721;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  margin-top: 1.4rem;
+  height: 170px;
+  overflow: auto;
+  box-shadow: inset 0 0 10px #000;
 }

@@ -56,17 +56,17 @@ const menu = Menu.buildFromTemplate([
       },
     ],
   },
-  // {
-  //   label: 'Developer',
-  //   submenu: [
-  //     {
-  //       role: 'reload'
-  //     },
-  //     {
-  //       role: 'toggledevtools'
-  //     },
-  //   ],
-  // },
+  {
+    label: 'Developer',
+    submenu: [
+      {
+        role: 'reload'
+      },
+      {
+        role: 'toggledevtools'
+      },
+    ],
+  },
 ]);
 Menu.setApplicationMenu(menu);
 

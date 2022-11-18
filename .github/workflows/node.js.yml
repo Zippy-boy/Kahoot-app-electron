@@ -26,5 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm i electon-forge
+    - run: npm i electron
+    - run: npm i electron-forge
     - run: electron-forge package

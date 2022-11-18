@@ -11,13 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -30,11 +24,7 @@ jobs:
     
   package:
     needs: [build]
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
-        node-version: [18.x]
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
@@ -52,10 +42,7 @@ jobs:
   publish:
     name: "Publish to GitHub Packages"
     needs: [package]
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
+    runs-on: windows-latest
     steps:
     - name: Upload
       uses: actions/download-artifact@v2

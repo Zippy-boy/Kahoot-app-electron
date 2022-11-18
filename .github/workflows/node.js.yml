@@ -14,10 +14,10 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 14.x
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 14.x
         cache: 'npm'
     - run: npm i electron
     - run: npm i electron-forge
@@ -31,14 +31,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: npm i electron
-      - run: npm i electron-forge
+      - run: npm ci
       - run: npm version prerelease --preid=ci-$GITHUB_RUN_ID --no-git-tag-version
+      - run: npm pack
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: package
-          path: "*.exe"
+            name: package
+            path: "*.tgz"
   publish:
     name: "Publish to GitHub Packages"
     needs: [package]
@@ -48,14 +48,12 @@ jobs:
       uses: actions/download-artifact@v2
       with:
           name: package
-    - run: npm i electron
-    - run: npm i electron-forge
     - uses: actions/setup-node@v1
       with:
         node-version: 14.x
         registry-url: https://npm.pkg.github.com/
         scope: "@aaronpowell"
     - run: echo "registry=https://npm.pkg.github.com/@aaronpowell" >> .npmrc
-    - run: npm publish $(ls *.exe)
+    - run: npm publish $(ls *.tgz)
       env:
         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

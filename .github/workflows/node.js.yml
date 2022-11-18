@@ -28,4 +28,4 @@ jobs:
         cache: 'npm'
     - run: npm i electron
     - run: npm i electron-forge
-    - run: electron-forge package
+    - run: npm run package

@@ -10,6 +10,24 @@ on:
     branches: [ "master" ]
 
 jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm i electron
+    - run: npm i electron-forge
+    
   package:
     needs: [build]
     runs-on: ${{ matrix.os }}
@@ -26,13 +44,11 @@ jobs:
       - run: npm i electron
       - run: npm i electron-forge
       - run: npm version prerelease --preid=ci-$GITHUB_RUN_ID --no-git-tag-version
-      - run: npm run make
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: package
           path: "*.exe"
-
   publish:
     name: "Publish to GitHub Packages"
     needs: [package]

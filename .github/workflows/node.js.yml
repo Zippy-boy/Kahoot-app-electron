@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
@@ -29,6 +27,44 @@ jobs:
         cache: 'npm'
     - run: npm i electron
     - run: npm i electron-forge
-    - run: npm run make
+    - run: npm run package
     
-  
+  package:
+    needs: [build]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+        
+      - run: npm version prerelease --preid=ci-$GITHUB_RUN_ID --no-git-tag-version
+      - run: npm run make
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: "*.exe"
+  publish:
+    name: "Publish to GitHub Packages"
+    needs: [package]
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Upload
+      uses: actions/download-artifact@v2
+      with:
+          name: package
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+        registry-url: https://npm.pkg.github.com/
+        scope: "@aaronpowell"
+    - run: echo "registry=https://npm.pkg.github.com/@aaronpowell" >> .npmrc
+    - run: npm publish $(ls *.tgz)
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

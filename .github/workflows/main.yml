@@ -1,2 +1,0 @@
-- name: Electron Forge Action
-  uses: yinxulai/actions-electron-forge@0.05

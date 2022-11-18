@@ -21,7 +21,7 @@ jobs:
         cache: 'npm'
     - run: npm i electron
     - run: npm i electron-forge
-    
+    - run: npm run make
   package:
     needs: [build]
     runs-on: windows-latest

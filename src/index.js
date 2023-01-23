@@ -15,7 +15,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    resizable: false,
+    resizable: true,
   });
 
   // and load the index.html of the app.
@@ -56,17 +56,17 @@ const menu = Menu.buildFromTemplate([
       },
     ],
   },
-  // {
-  //   label: 'Developer',
-  //   submenu: [
-  //     {
-  //       role: 'reload'
-  //     },
-  //     {
-  //       role: 'toggledevtools'
-  //     },
-  //   ],
-  // },
+  {
+    label: 'Developer',
+    submenu: [
+      {
+        role: 'reload'
+      },
+      {
+        role: 'toggledevtools'
+      },
+    ],
+  },
 ]);
 Menu.setApplicationMenu(menu);
 

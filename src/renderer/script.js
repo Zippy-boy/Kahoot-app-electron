@@ -1,3 +1,19 @@
+import { doc, onSnapshot } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+const firebaseConfig = {
+  apiKey: "AIzaSyDOV0URdYfzfjqG9QjkdW3OHirEszjsJ88",
+  authDomain: "kahoot-hacker.firebaseapp.com",
+  projectId: "kahoot-hacker",
+  storageBucket: "kahoot-hacker.appspot.com",
+  messagingSenderId: "531901517032",
+  appId: "1:531901517032:web:3214a7dcbeecb3e38f0d5d",
+  measurementId: "G-MFL0NK6DME"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 let url = "fead96f4-ff33-43a0-bbc1-c1bafb2b11b1";
 let kahoot_id = url;
 let answers_url = `https://create.kahoot.it/rest/kahoots/` + kahoot_id + `/card/?includeKahoot=true`;
@@ -70,3 +86,7 @@ function enter() {
         );
     } catch (error) {questionHTML.innerHTML = "invalid kahoot id";}
 }
+
+const unsub = onSnapshot(doc(db, "mainCollection", "SF"), (doc) => {
+    console.log("Current data: ", doc.data());
+});
